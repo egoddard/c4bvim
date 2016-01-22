@@ -1,0 +1,35 @@
+*c4bvim.txt* C4bvim is a Code4Brownies alternative student plugin that allows
+students to submit code to the Code4Brownies server from Vim.
+
+===============================================================================
+CONTENTS                                                               *c4bvim*
+
+    1. Intro ................................................... |c4bvim-intro|
+    2. Requirements ..................................... |c4bvim-requirements|
+    3. Usage ................................................... |c4bvim-usage|
+===============================================================================
+1. Intro                                                         *c4bvim-intro*
+
+C4bvim is a plugin for the Code4Brownies tool that allows students to
+submit the current buffer to the instructor's Code4Brownies server. It has
+the same functionality as the Sublime Text student plugin, allowing students
+to share code, set the server and username, and see their points.
+
+2. Requirements                                           *c4bvim-requirements*
+
+A recent build of vim that includes python support is required to use c4bvim.
+Additionally, the requests python package is also required and can be
+installed on most systems with 'pip install requests'. If you do not have pip
+installed, see https://pip.pypa.io/en/latest/installing/.
+
+3. Usage                                                         *c4bvim-usage*
+
+To use the plugin, the user name and server must be set. Use :C4bSetInfo name
+server to set your user name and  server/port information. For example, if your name is bob and
+the server is 0.0.0.0:4030, use :C4bSetInfo bob 0.0.0.0:4030.
+
+With the user and server information set, you can share the current buffer
+with :C4bShare, view your current points with :C4bPoints, or view the current
+user name and server info with :C4bGetInfo.
+
+vim:ft=help
