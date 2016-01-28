@@ -26,7 +26,7 @@ def c4b_share(content):
 
     if info is not None:
         url = urljoin(info['Server'], c4b_SUBMIT_POST_PATH)
-        payload = {'login': os.getlogin(), 'uid': info['Name'],
+        payload = {'uid': info['Name'],
                    'body': content }
         try:
             response = requests.post(url, data=payload, timeout=TIMEOUT)
@@ -45,7 +45,7 @@ def c4b_show_points():
 
     if info is not None:
         url = urljoin(info['Server'], c4b_MY_POINTS_PATH)
-        payload = {'login': os.getlogin(), 'uid': info['Name']}
+        payload = {'uid': info['Name']}
         try:
             response = requests.post(url, data=payload, timeout=TIMEOUT)
             print(response.text)
