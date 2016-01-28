@@ -27,6 +27,26 @@ response = c4b_share("\n".join(vim.current.buffer[:]))
 endOfPython
 endfunction
 
+function! C4bShareVisual() range
+python << endOfPython
+
+import vim
+from c4bvim import c4b_share
+def get_visual_selection():
+    buf = vim.current.buffer
+    (starting_line_num, col1) = buf.mark('<')
+    (ending_line_num, col2) = buf.mark('>')
+    lines = vim.eval('getline({}, {})'.format(starting_line_num,
+                                              ending_line_num))
+    lines[0] = lines[0][col1:]
+    lines[-1] = lines[-1][:col2 + 1]
+
+    return lines
+
+response = c4b_share("\n".join(get_visual_selection()))
+endOfPython
+endfunction
+
 function! C4bSetInfo(name,server)
 python << endOfPython
 
@@ -57,5 +77,6 @@ endfunction
 " --------------------------------
 command! C4bPoints call C4bPoints()
 command! C4bShare call C4bShare()
+command! C4bShareVisual call C4bShareVisual()
 command! -nargs=+ C4bSetInfo call C4bSetInfo(<f-args>)
 command! C4bGetInfo call C4bGetInfo()
