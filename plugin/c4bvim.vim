@@ -10,10 +10,12 @@ python sys.path.append(vim.eval('expand("<sfile>:h")'))
 " --------------------------------
 function! C4bWhiteboard()
 python << endPython
+
 import vim
 from c4bvim import c4b_receive_broadcast
 whiteboard = c4b_receive_broadcast()
-vim.command('edit {}'.format(whiteboard))
+if whiteboard:
+    vim.command('edit {}'.format(whiteboard))
 
 endPython
 endfunction

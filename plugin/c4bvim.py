@@ -37,6 +37,9 @@ def c4b_receive_broadcast():
             with open(wb, 'w') as f:
                 f.write(content)
         return wb
+    else:
+        print('Code4Brownies user and server info has not been configured. Please see :help c4bvim for more information.')
+        return None
 
 def c4b_share(content):
     """
