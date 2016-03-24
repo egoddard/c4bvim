@@ -41,7 +41,7 @@ def c4b_receive_broadcast():
         print('Code4Brownies user and server info has not been configured. Please see :help c4bvim for more information.')
         return None
 
-def c4b_share(content):
+def c4b_share(content, fname):
     """
     Share the buffer with the a Code4Brownies server instance.
     """
@@ -50,8 +50,11 @@ def c4b_share(content):
     if info is not None:
         url = '{url}/{path}'.format(url=info['Server'],
                 path=c4b_SUBMIT_POST_PATH)
+
+        base, ext = os.path.splitext(fname)
         payload = {'uid': info['Name'],
-                   'body': content }
+                   'body': content,
+                   'ext': ext}
         try:
             response = requests.post(url, data=payload, timeout=TIMEOUT)
             print(response.text)

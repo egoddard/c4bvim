@@ -34,7 +34,7 @@ python << endOfPython
 
 import vim
 from c4bvim import c4b_share
-response = c4b_share("\n".join(vim.current.buffer[:]))
+response = c4b_share("\n".join(vim.current.buffer[:]), vim.eval('expand("%:t")'))
 
 endOfPython
 endfunction
