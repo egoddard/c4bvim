@@ -1,11 +1,6 @@
 import os
 import sys
 
-# Try importing urljoin from python 3 first, then python 2
-try:
-    from urllib.parse import urljoin
-except ImportError:
-    from urlparse import urljoin
 try:
     import requests
 except ImportError:
@@ -25,7 +20,8 @@ def c4b_share(content):
     info = c4b_get_info()
 
     if info is not None:
-        url = urljoin(info['Server'], c4b_SUBMIT_POST_PATH)
+        url = '{url}/{path}'.format(url=info['Server'],
+                path=c4b_SUBMIT_POST_PATH)
         payload = {'uid': info['Name'],
                    'body': content }
         try:
@@ -44,7 +40,8 @@ def c4b_show_points():
     info = c4b_get_info()
 
     if info is not None:
-        url = urljoin(info['Server'], c4b_MY_POINTS_PATH)
+        url = '{url}/{path}'.format(url=info['Server'],
+                path=c4b_SUBMIT_POST_PATH)
         payload = {'uid': info['Name']}
         try:
             response = requests.post(url, data=payload, timeout=TIMEOUT)
