@@ -54,7 +54,7 @@ def c4b_share(content, fname):
         base, ext = os.path.splitext(fname)
         payload = {'uid': info['Name'],
                    'body': content,
-                   'ext': ext}
+                   'ext': ext.replace('.', '')}
         try:
             response = requests.post(url, data=payload, timeout=TIMEOUT)
             print(response.text)
