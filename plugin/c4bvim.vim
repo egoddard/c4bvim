@@ -8,6 +8,16 @@ python sys.path.append(vim.eval('expand("<sfile>:h")'))
 " --------------------------------
 "  Function(s)
 " --------------------------------
+function! C4bWhiteboard()
+python << endPython
+import vim
+from c4bvim import c4b_receive_broadcast
+whiteboard = c4b_receive_broadcast()
+vim.command('edit {}'.format(whiteboard))
+
+endPython
+endfunction
+
 function! C4bPoints()
 python << endOfPython
 
@@ -80,3 +90,4 @@ command! C4bShare call C4bShare()
 command! C4bShareVisual call C4bShareVisual()
 command! -nargs=+ C4bSetInfo call C4bSetInfo(<f-args>)
 command! C4bGetInfo call C4bGetInfo()
+command! C4bWhiteboard call C4bWhiteboard()

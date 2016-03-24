@@ -9,9 +9,35 @@ except ImportError:
 import json
 
 c4b_INFO = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'info')
+c4b_WHITEBOARD = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+    'whiteboard')
 c4b_SUBMIT_POST_PATH = 'submit_post'
 c4b_MY_POINTS_PATH = 'my_points'
+c4b_RECEIVE_BROADCAST_PATH = "receive_broadcast"
 TIMEOUT = 10
+
+def c4b_receive_broadcast():
+    """
+    Request the content of the whiteboard from the instructor.
+    """
+    info = c4b_get_info()
+
+    if info is not None:
+        url = "{url}/{path}".format(url=info['Server'],
+                path=c4b_RECEIVE_BROADCAST_PATH)
+        request = requests.get(url)
+
+        try:
+            whiteboard = request.json()
+        except ValueError:
+            print "No whiteboard content is available."
+
+        if whiteboard:
+            content, ext = whiteboard['whiteboard'], whiteboard['ext']
+            wb = c4b_WHITEBOARD if ext == '' else "{}.{}".format(c4b_WHITEBOARD, ext)
+            with open(wb, 'w') as f:
+                f.write(content)
+        return wb
 
 def c4b_share(content):
     """
