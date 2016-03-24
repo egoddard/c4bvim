@@ -9,8 +9,7 @@ except ImportError:
 import json
 
 c4b_INFO = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'info')
-c4b_WHITEBOARD = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-    'whiteboard')
+c4b_WHITEBOARD = os.path.join(os.getcwd(), 'whiteboard')
 c4b_SUBMIT_POST_PATH = 'submit_post'
 c4b_MY_POINTS_PATH = 'my_points'
 c4b_RECEIVE_BROADCAST_PATH = "receive_broadcast"
